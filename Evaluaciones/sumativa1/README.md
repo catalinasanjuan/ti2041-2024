@@ -28,4 +28,3 @@ Este es un proyecto básico en Django que permite a los administradores de "Gest
 5. Abre el navegador y accede a la aplicación:
     http://127.0.0.1:8000/
     
-
