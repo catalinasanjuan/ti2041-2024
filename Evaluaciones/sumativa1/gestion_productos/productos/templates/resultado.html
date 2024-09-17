@@ -1,8 +1,11 @@
 {% load static %}
-<h1>Producto registrado exitosamente</h1>
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-<p>Código: {{ producto.codigo }}</p>
-<p>Nombre: {{ producto.nombre }}</p>
-<p>Marca: {{ producto.marca }}</p>
-<p>Fecha de Vencimiento: {{ producto.fecha_vencimiento }}</p>
-<a href="{% url 'registro' %}">Registrar otro producto</a>
+<div class="container">
+    <h1>Producto registrado exitosamente</h1>
+    <p>Código: {{ producto.codigo }}</p>
+    <p>Nombre: {{ producto.nombre }}</p>
+    <p>Marca: {{ producto.marca }}</p>
+    <p>Fecha de Vencimiento: {{ producto.fecha_vencimiento }}</p>
+    <a href="{% url 'registro' %}">Registrar otro producto</a>
+</div>
+

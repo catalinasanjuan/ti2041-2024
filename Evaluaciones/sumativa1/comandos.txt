@@ -1,3 +1,4 @@
+cd Evaluaciones
 cd sumativa1
 cd gestion_productos
 

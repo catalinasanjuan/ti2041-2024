@@ -1,18 +1,26 @@
 {% load static %}
-<h1>Registro de Producto</h1>
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-<form method="post">
-    {% csrf_token %}
-    <label for="codigo">Código:</label>
-    <input type="text" id="codigo" name="codigo"><br><br>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre"><br><br>
-    <label for="marca">Marca:</label>
-    <input type="text" id="marca" name="marca"><br><br>
-    <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
-    <input type="date" id="fecha_vencimiento" name="fecha_vencimiento"><br><br>
-    <button type="submit">Registrar</button>
-</form>
-{% if error %}
-<p class="error">{{ error }}</p>
-{% endif %}
+<div class="container">
+    <h1>Registro de Producto</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo"><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca"><br><br>
+
+        <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+        <input type="date" id="fecha_vencimiento" name="fecha_vencimiento"><br><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
