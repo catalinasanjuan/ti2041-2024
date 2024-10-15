@@ -22,5 +22,5 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', include('productos.urls')),
-    path('', lambda request: redirect('registro')),  # Redirige a la vista de registro
+    path('', lambda request: redirect('index')), 
 ]
