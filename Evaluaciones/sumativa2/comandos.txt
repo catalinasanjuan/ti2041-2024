@@ -1,4 +1,4 @@
-cd sumativa1
+cd sumativa2
 cd gestion_productos
 python manage.py makemigrations
 python manage.py migrate

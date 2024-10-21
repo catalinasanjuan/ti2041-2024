@@ -1,0 +1,43 @@
+# Gestión de Productos S.A.
+
+Este es un proyecto desarrollado en Django para la gestión de productos de la empresa "Gestión de Productos S.A." Incluye modelos, vistas, formularios y plantillas que permiten gestionar productos, categorías, marcas y características. Además, se ha estilizado con CSS para una mejor presentación visual.
+
+## Requisitos
+
+Asegúrate de tener instalados los siguientes requisitos antes de ejecutar la aplicación:
+
+- Python 3.12 o superior
+- Django 5.1 o superior
+- SQLite3 (opcional, ya que Django lo utiliza por defecto)
+
+## Instalación
+
+### Clonar el repositorio
+
+Clona este repositorio:
+
+git clone <https://github.com/catalinasanjuan/ti2041-2024.git>
+
+
+## Ejecución 
+Ejecuta los siguientes comandos en la terminal de tu editor:
+
+- python manage.py runserver
+- http://127.0.0.1:8000/productos/registro/
+- http://127.0.0.1:8000/
+
+
+la URL http://127.0.0.1:8000/productos/registro/ te permitirá registar un productor, mientras que, la URL http://127.0.0.1:8000/ te permitirá ver el listdo de productos.
+
+
+## Administrador de Django
+
+- Nombre de usuario: admin
+- Contraseña: inacap2024
+
+## Información Importante
+
+No olvides que a la hora de ejecutar la aplicación debes encontrarte en la carpeta de gestion_productos. Para eso, escribe en tu terminal:
+
+- cd sumativa2
+- cd gestion_productos
