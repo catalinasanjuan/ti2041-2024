@@ -1,0 +1,10 @@
+{% load static %}
+<h1>Consulta de Productos</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<ul>
+    {% for producto in productos %}
+    <li>
+        <strong>{{ producto.codigo }}</strong> - {{ producto.nombre }} (Marca: {{ producto.marca }}, Fecha de Vencimiento: {{ producto.fecha_vencimiento }})
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <form method="GET" action="">
+        <label for="categoria">Filtrar por categoría:</label>
+        <input type="text" id="categoria" name="categoria">
+        <label for="marca">Filtrar por marca:</label>
+        <input type="text" id="marca" name="marca">
+        <button type="submit">Aplicar Filtros</button>
+    </form>
+    
+    <ul>
+        {% for producto in productos %}
+            <li><strong>Código:</strong> {{ producto.codigo }} - <strong>Nombre:</strong> {{ producto.nombre }} - <strong>Marca:</strong> {{ producto.marca }} - <strong>Fecha de Vencimiento:</strong> {{ producto.fecha_vencimiento }}</li>
+        {% empty %}
+            <li>No hay productos registrados.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+
+</body>
+</html>
