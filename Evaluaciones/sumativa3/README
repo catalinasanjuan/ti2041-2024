@@ -18,20 +18,31 @@ Clona este repositorio:
 
 git clone <https://github.com/catalinasanjuan/ti2041-2024.git>
 
+## Instalar dependencias 
+instalar las dependencias de Django
+- pip install django
+
+## Migrar la base de datos
+Para configurar la base de datos, ejecuta las migraciones necesarias:
+
+- python manage.py makemigrations
+- python manage.py migrate
 
 ## Ejecución 
 Ejecuta los siguientes comandos en la terminal de tu editor:
 
 - python manage.py runserver
-- http://127.0.0.1:8000/productos/registro/
-- http://127.0.0.1:8000/
 
+Abre en tu navegador la URL:
+- http://127.0.0.1:8000
 
-la URL http://127.0.0.1:8000/productos/registro/ te permitirá registar un productor, mientras que, la URL http://127.0.0.1:8000/ te permitirá ver el listdo de productos.
-
+## Credenciales Login
+- Nombre de usuario: admin
+- Contraseña: inacap2024
 
 ## Administrador de Django
 
+- Administrador de Django: http://127.0.0.1:8000/admin/
 - Nombre de usuario: admin
 - Contraseña: inacap2024
 
@@ -39,5 +50,5 @@ la URL http://127.0.0.1:8000/productos/registro/ te permitirá registar un produ
 
 No olvides que a la hora de ejecutar la aplicación debes encontrarte en la carpeta de gestion_productos. Para eso, escribe en tu terminal:
 
-- cd sumativa2
+- cd sumativa3
 - cd gestion_productos
