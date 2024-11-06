@@ -1,9 +1,14 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import Group
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from .models import Producto
 from .forms import ProductoForm
+
+def is_admin_products(user):
+    return user.groups.filter(name='ADMIN_PRODUCTS').exists()
 
 def login_view(request):
     if request.method == 'POST':
@@ -11,7 +16,12 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('index')  
+            
+            request.session['username'] = user.username
+            request.session['login_time'] = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
+            request.session['is_admin_products'] = user.groups.filter(name='ADMIN_PRODUCTS').exists()
+            
+            return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -21,13 +31,22 @@ def index(request):
     productos = Producto.objects.all()
     categoria = request.GET.get('categoria')
     marca = request.GET.get('marca')
+    
     if categoria:
         productos = productos.filter(categoria__nombre=categoria)
     if marca:
         productos = productos.filter(marca__nombre=marca)
-    return render(request, 'index.html', {'productos': productos})
+    
+    # Pasar los datos de sesión al contexto
+    context = {
+        'productos': productos,
+        'username': request.session.get('username'),
+        'login_time': request.session.get('login_time')
+    }
+    
+    return render(request, 'index.html', context)
 
-@login_required
+@user_passes_test(is_admin_products)
 def registro_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
@@ -42,3 +61,26 @@ def registro_producto(request):
 def resultado(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     return render(request, 'resultado.html', {'producto': producto})
+
+@login_required
+@user_passes_test(is_admin_products)
+def editar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'editar_producto.html', {'form': form, 'producto': producto})
+
+@login_required
+@user_passes_test(is_admin_products)
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('index')
+    return render(request, 'confirmar_eliminar.html', {'producto': producto})
+

@@ -1,18 +1,21 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Producto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Registrar Producto</title>
 </head>
-<body>
-    <h1>Registrar un nuevo producto</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrar</button>
-    </form>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+    <div class="container p-4 bg-white rounded shadow-sm" style="max-width: 500px;">
+        <h2 class="text-center">Registrar Producto</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success btn-block">Registrar Producto</button>
+        </form>
+    </div>
 </body>
 </html>

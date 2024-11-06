@@ -46,6 +46,22 @@ Abre en tu navegador la URL:
 - Nombre de usuario: admin
 - Contraseña: inacap2024
 
+## Medidas de Seguridad Implementadas
+La aplicación cuenta con las siguientes medidas de seguridad:
+
+- Autenticación y Autorización de Usuarios:
+Se implementa un sistema de inicio de sesión para restringir el acceso al catálogo de productos. Solo usuarios autenticados pueden ver el listado.
+Uso de grupos de usuarios para asignar permisos específicos. Solo los usuarios del grupo ADMIN_PRODUCTSpueden crear, editar o eliminar productos.
+
+- Protección CSRF:
+Se ha activado la protección CSRF (Cross-Site Request Forgery) en los formularios para evitar ataques de falsificación de solicitudes.
+
+- Restricción de Acceso a Vistas Específicas:
+Uso de decoradores @login_requiredy @user_passes_testpara restringir el acceso a las vistas sensibles, garantizando que solo los usuarios autenticados y con los permisos necesarios puedan realizar ciertas acciones.
+
+## Estilos y presentación visual
+La aplicación utiliza Bootstrap y estilos personalizados en CSS para lograr una presentación visual coherente y profesional. Cada vista está diseñada para ser intuitiva y fácil de navegar.
+
 ## Información Importante
 
 No olvides que a la hora de ejecutar la aplicación debes encontrarte en la carpeta de gestion_productos. Para eso, escribe en tu terminal:
