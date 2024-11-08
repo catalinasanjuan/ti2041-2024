@@ -51,8 +51,8 @@ def registro_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            producto = form.save()
-            return redirect('resultado', producto_id=producto.id)
+            form.save()
+            return redirect('index')  # Redirige a la lista de productos después de registrar
     else:
         form = ProductoForm()
     return render(request, 'registro.html', {'form': form})

@@ -28,7 +28,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)  # Asegúrate de que este campo exista
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, default=1)  # Valor por defecto
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
-    caracteristicas = models.ManyToManyField(Caracteristica)
+    caracteristicas = models.TextField()
 
     def __str__(self):
         return self.nombre
