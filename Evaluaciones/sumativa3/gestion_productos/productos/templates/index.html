@@ -1,54 +1,87 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Lista de Productos</title>
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
-    <div class="container p-4 bg-white rounded shadow-sm" style="max-width: 600px;">
-        <nav class="mb-4 d-flex justify-content-between">
-            <a href="{% url 'admin:index' %}" class="btn btn-primary">Administración</a>
-            <a href="{% url 'logout' %}" class="btn btn-danger">Desconectarse</a>
-        </nav>
-        
-        <h1 class="text-center">Lista de Productos</h1>
-        <p class="text-center">Bienvenido, {{ username }}. Conectado desde: {{ login_time }}</p>
 
-        <form method="GET" action="" class="mb-4">
-            <div class="form-group">
-                <label for="categoria">Filtrar por categoría:</label>
-                <input type="text" id="categoria" name="categoria" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="marca">Filtrar por marca:</label>
-                <input type="text" id="marca" name="marca" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success btn-block">Aplicar Filtros</button>
-        </form>
-        
-        <ul class="list-group">
-            {% for producto in productos %}
-                <li class="list-group-item">
-                    <strong>Código:</strong> {{ producto.codigo }} -
-                    <strong>Nombre:</strong> {{ producto.nombre }} -
-                    <strong>Marca:</strong> {{ producto.marca }} -
-                    <strong>Fecha de Vencimiento:</strong> {{ producto.fecha_vencimiento }}
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gestión de Productos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}">Administración</a>
                 </li>
-            {% empty %}
-                <li class="list-group-item">No hay productos registrados.</li>
-            {% endfor %}
-        </ul>
-        
-        <div class="text-center mt-3">
-            <a href="{% url 'logout' %}" class="btn btn-warning">Cerrar sesión</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Ver Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white" href="{% url 'logout' %}">Desconectarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="text-center">Lista de Productos</h1>
+    <p class="text-center">Bienvenido, {{ username }}. Conectado desde: {{ login_time }}</p>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="GET" action="">
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Filtrar por categoría:</label>
+                    <input type="text" id="categoria" name="categoria" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="marca" class="form-label">Filtrar por marca:</label>
+                    <input type="text" id="marca" name="marca" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success w-100">Aplicar Filtros</button>
+            </form>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="mt-4">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Fecha de Vencimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.codigo }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.marca }}</td>
+                    <td>{{ producto.fecha_vencimiento }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No hay productos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
