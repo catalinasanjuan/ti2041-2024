@@ -82,7 +82,18 @@ def editar_producto(request, producto_id):
             return redirect('index')
     else:
         form = ProductoForm(instance=producto)
-    return render(request, 'editar_producto.html', {'form': form, 'producto': producto})
+    
+    # Obtener todas las categorías y marcas para los selects
+    categorias = Categoria.objects.all()
+    marcas = Marca.objects.all()
+    
+    return render(request, 'editar_producto.html', {
+        'form': form,
+        'producto': producto,
+        'categorias': categorias,
+        'marcas': marcas
+    })
+
 
 @login_required
 @user_passes_test(is_admin_products)
