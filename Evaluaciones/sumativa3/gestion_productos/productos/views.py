@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .models import Producto
+from .models import Producto,Categoria, Marca
 from .forms import ProductoForm
 
 def is_admin_products(user):
@@ -48,14 +48,23 @@ def index(request):
 
 @user_passes_test(is_admin_products)
 def registro_producto(request):
+    categorias = Categoria.objects.all()  # Obteniendo todas las categorías
+    marcas = Marca.objects.all()          # Obteniendo todas las marcas
+
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')  # Redirige a la lista de productos después de registrar
+            # Redirige a una página de éxito o a la lista de productos, por ejemplo
     else:
         form = ProductoForm()
-    return render(request, 'registro.html', {'form': form})
+
+    context = {
+        'form': form,
+        'categorias': categorias,
+        'marcas': marcas
+    }
+    return render(request, 'registro.html', context)
 
 @login_required
 def resultado(request, producto_id):
