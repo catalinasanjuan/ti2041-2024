@@ -11,6 +11,15 @@
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
     <div class="container p-4 bg-white rounded shadow-sm" style="max-width: 400px;">
         <h2 class="text-center">Iniciar sesión</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <form method="post" action="">
             {% csrf_token %}
             <div class="form-group">
@@ -23,11 +32,6 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
         </form>
-        {% if form.errors %}
-            <div class="alert alert-danger mt-3">
-                {{ form.errors }}
-            </div>
-        {% endif %}
     </div>
 </body>
 </html>
