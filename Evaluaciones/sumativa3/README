@@ -40,6 +40,9 @@ Abre en tu navegador la URL:
 - Nombre de usuario: admin
 - Contraseña: inacap2024
 
+- Nombre de usuario: user
+- Contraseña: user2024
+
 ## Administrador de Django
 
 - Administrador de Django: http://127.0.0.1:8000/admin/
