@@ -71,3 +71,6 @@ No olvides que a la hora de ejecutar la aplicación debes encontrarte en la carp
 
 - cd sumativa3
 - cd gestion_productos
+
+Profe no pude conectar los perfiles con el login :(, pero si prueba la url de la vista del user:http://127.0.0.1:8000/listar_productos/ puede ver como debería ser la vista del user. perdón. 
+

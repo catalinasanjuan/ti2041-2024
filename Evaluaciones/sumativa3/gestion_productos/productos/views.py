@@ -19,10 +19,6 @@ def solo_ver(user):
 def is_admin_products(user):
     return user.groups.filter(name='ADMIN_PRODUCTS').exists()
 
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.shortcuts import redirect, render
-
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -31,15 +27,17 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            # Redirige en función del grupo del usuario
+            # Verificación del grupo para redirigir
             if user.groups.filter(name='VIEW_ONLY').exists():
+                print("Usuario con VIEW_ONLY, redirigiendo a listar_productos")
                 return redirect('listar_productos')  # Redirige a listar_productos si está en VIEW_ONLY
             else:
+                print("Usuario con permisos admin, redirigiendo a index")
                 return redirect('index')  # Redirige a index para otros usuarios (admin)
         else:
             messages.error(request, "Credenciales incorrectas. Por favor, intenta nuevamente.")
+            print("Credenciales incorrectas para el usuario:", username)
     return render(request, 'login.html')
-
 
 @login_required
 def index(request):
