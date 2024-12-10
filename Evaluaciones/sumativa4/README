@@ -1,0 +1,85 @@
+# Gestión de Productos S.A.
+
+Este es un proyecto desarrollado en Django para la gestión de productos de la empresa "Gestión de Productos S.A." Incluye modelos, vistas, formularios y plantillas que permiten gestionar productos, categorías, marcas y características. Además, se ha estilizado con CSS para una mejor presentación visual.
+
+## Requisitos
+
+Asegúrate de tener instalados los siguientes requisitos antes de ejecutar la aplicación:
+
+- Python 3.12 o superior
+- Django 5.1 o superior
+- SQLite3 (opcional, ya que Django lo utiliza por defecto)
+
+## Instalación
+
+### Clonar el repositorio
+
+Clona este repositorio:
+
+git clone <https://github.com/catalinasanjuan/ti2041-2024.git>
+
+## Instalar dependencias 
+instalar las dependencias de Django
+- pip install django
+
+## Migrar la base de datos
+Para configurar la base de datos, ejecuta las migraciones necesarias:
+
+- python manage.py makemigrations
+- python manage.py migrate
+
+## Ejecución 
+Ejecuta los siguientes comandos en la terminal de tu editor:
+
+- python manage.py runserver
+
+Abre en tu navegador la URL:
+- http://127.0.0.1:8000
+
+## Credenciales Login
+- Nombre de usuario: admin
+- Contraseña: inacap2024
+
+- Nombre de usuario: user
+- Contraseña: user2024
+
+## Administrador de Django
+
+- Administrador de Django: http://127.0.0.1:8000/admin/
+- Nombre de usuario: admin
+- Contraseña: inacap2024
+
+## API REST
+Se ha implementado una API REST básica utilizando NinjaAPI. La documentación Swagger está disponible en:
+- http://127.0.0.1 : 8000 /api /docs
+Servicios disponibles:
+
+GET /api/productos : Lista todos los productos.
+POST /api/productos : Crea un nuevo producto (requiere nombre y precio como parámetros).
+GET /api/productos/{producto_id} : Obtiene información de un producto específico.
+
+## Medidas de Seguridad Implementadas
+La aplicación cuenta con las siguientes medidas de seguridad:
+
+- Autenticación y Autorización de Usuarios:
+Se implementa un sistema de inicio de sesión para restringir el acceso al catálogo de productos. Solo usuarios autenticados pueden ver el listado.
+Uso de grupos de usuarios para asignar permisos específicos. Solo los usuarios del grupo ADMIN_PRODUCTSpueden crear, editar o eliminar productos.
+
+- Protección CSRF:
+Se ha activado la protección CSRF (Cross-Site Request Forgery) en los formularios para evitar ataques de falsificación de solicitudes.
+
+- Restricción de Acceso a Vistas Específicas:
+Uso de decoradores @login_requiredy @user_passes_testpara restringir el acceso a las vistas sensibles, garantizando que solo los usuarios autenticados y con los permisos necesarios puedan realizar ciertas acciones.
+
+## Estilos y presentación visual
+La aplicación utiliza Bootstrap y estilos personalizados en CSS para lograr una presentación visual coherente y profesional. Cada vista está diseñada para ser intuitiva y fácil de navegar.
+
+## Información Importante
+
+No olvides que a la hora de ejecutar la aplicación debes encontrarte en la carpeta de gestion_productos. Para eso, escribe en tu terminal:
+
+- cd sumativa4
+- cd gestion_productos
+
+Profe no pude conectar los perfiles con el login :(, pero si prueba la url de la vista del user:http://127.0.0.1:8000/listar_productos/ puede ver como debería ser la vista del user. perdón. 
+

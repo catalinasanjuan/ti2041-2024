@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registrar Producto</title>
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+    <div class="container p-4 bg-white rounded shadow-sm" style="max-width: 500px;">
+        <h2 class="text-center">Registrar Producto</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="codigo">Código:</label>
+                <input type="text" id="codigo" name="codigo" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                
+                
+<label for="precio">Precio:</label>
+                <input type="text" id="precio" name="precio" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" class="form-control">
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <select id="marca" name="marca" class="form-control">
+                    {% for marca in marcas %}
+                        <option value="{{ marca.id }}">{{ marca.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="caracteristicas">Características:</label>
+                <textarea id="caracteristicas" name="caracteristicas" class="form-control" rows="4" placeholder="Escribe las características del producto"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Registrar Producto</button>
+            <a href="{% url 'index' %}" class="btn btn-secondary btn-block mt-2">Volver al Inicio</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gestión de Productos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}">Administración</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Ver Productos</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link text-white" style="text-decoration: none;">Desconectarse</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Lista de Productos</h1>
+        <a href="{% url 'registro_producto' %}" class="btn btn-primary">Registrar Producto</a>
+    </div>
+    
+    {% if user.is_authenticated %}
+    <p class="text-center">Bienvenido, {{ user.username }}. Conectado desde: {{ request.META.REMOTE_ADDR }}</p>
+    {% else %}
+        <p>No has iniciado sesión.</p>
+    {% endif %}
+
+    <div class="row">
+                <table class="table table-striped table-hover">
+
+            <form method="GET" action="">
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Filtrar por categoría:</label>
+                    <input type="text" id="categoria" name="categoria" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="marca" class="form-label">Filtrar por marca:</label>
+                    <input type="text" id="marca" name="marca" class="form-control">
+                </div>
+                <button type="submit" class="btn-primary">Aplicar Filtros</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Marca</th>
+                    <th>Características</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.codigo }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.categoria }}</td>
+                    <td>{{ producto.marca }}</td>
+                    <td>{{ producto.caracteristicas }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>
+                        <a href="{% url 'editar_producto' producto.id %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No hay productos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

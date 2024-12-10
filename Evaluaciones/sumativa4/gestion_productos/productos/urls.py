@@ -1,0 +1,20 @@
+from django.contrib.auth import views as auth_views
+from django.urls import path
+from . import views
+from .views import login_view
+from .api import api
+
+urlpatterns = [
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path("login/", login_view, name="login"),
+    path('listar_productos/', views.listar_productos, name='listar_productos'),
+    path('productos/', views.index, name='index'),
+    path('registro/', views.registro_producto, name='registro_producto'),
+    path('resultado/<int:producto_id>/', views.resultado, name='resultado'),
+    path('editar/<int:producto_id>/', views.editar_producto, name='editar_producto'),
+    path('eliminar/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', auth_views.LoginView.as_view(template_name='login.html')),  
+    path("api/", api.urls),
+    
+]
