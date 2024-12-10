@@ -15,6 +15,7 @@ urlpatterns = [
     path('eliminar/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', auth_views.LoginView.as_view(template_name='login.html')),  
+    path('admin/', admin.site.urls),
     path("api/", api.urls),
     
 ]
